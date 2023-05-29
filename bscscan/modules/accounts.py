@@ -623,6 +623,36 @@ class Accounts:
         )
 
     @staticmethod
+    def get_bep20_token_transfer_events_by_contract_address_block_based(
+        contract_address: str, startblock: int, endblock: int, sort: str
+    ):
+        """Get all token transfer events for a given BEP20 contract in startblock to endblock
+
+        Args:
+            contract_address (str): Target contract address.
+            startblock (int): start of the block for query.
+            endblock (int): end of the block for query.
+            sort (str): "asc" to return results in ascending order.
+
+        Returns:
+            List[dict]: All token transfers for target contract address.
+        """
+        return (
+            f"{fields.MODULE}"
+            f"{modules.ACCOUNT}"
+            f"{fields.ACTION}"
+            f"{actions.TOKENTX}"
+            f"{fields.CONTRACT_ADDRESS}"
+            f"{contract_address}"
+            f"{fields.START_BLOCK}"
+            f"{str(startblock)}"
+            f"{fields.END_BLOCK}"
+            f"{str(endblock)}"
+            f"{fields.SORT}"
+            f"{sort}"
+        )
+
+    @staticmethod
     def get_bep20_token_transfer_events_by_contract_address_paginated(
         contract_address: str, page: int, offset: int, sort: str
     ):

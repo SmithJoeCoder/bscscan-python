@@ -16,7 +16,7 @@ class SyncClient(BaseClient):
     def _exec(self, func):
         def wrapper(*args, **kwargs):
             url = (
-                f"{fields.PREFIX}"
+                f"{self.url}"
                 f"{func(*args, **kwargs)}"
                 f"{fields.API_KEY}"
                 f"{self._api_key}"
@@ -30,6 +30,8 @@ class SyncClient(BaseClient):
 
     def __enter__(self):
         self._session = Session()
+        user_agent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36'
+        self._session.headers.update({'user-agent': user_agent})
         return self._build()
 
     def __exit__(self, exc_type, exc_val, exc_tb):

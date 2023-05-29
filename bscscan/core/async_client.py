@@ -16,7 +16,7 @@ class AsyncClient(BaseClient):
     async def _exec(self, func):
         async def wrapper(*args, **kwargs):
             url = (
-                f"{fields.PREFIX}"
+                f"{self.url}"
                 f"{func(*args, **kwargs)}"
                 f"{fields.API_KEY}"
                 f"{self._api_key}"
@@ -30,6 +30,8 @@ class AsyncClient(BaseClient):
 
     async def __aenter__(self):
         self._session = ClientSession()
+        user_agent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36'
+        self._session.headers.update({'user-agent': user_agent})
         return await self._build()
 
     async def __aexit__(self, exc_type, exc_val, exc_tb):

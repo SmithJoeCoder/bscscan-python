@@ -235,6 +235,13 @@
       "sort": "asc"
     }
   },
+  "get_bep20_token_transfer_events_by_contract_address_block_based": {
+    "module": "accounts",
+    "kwargs": {
+      "contract_address": "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c",
+      "sort": "asc"
+    }
+  },
   "get_bep20_token_transfer_events_by_contract_address_paginated": {
     "module": "accounts",
     "kwargs": {
